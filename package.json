@@ -1,0 +1,14 @@
+{
+  "name": "flow-based-programming",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "repository": "https://github.com/scaljeri/flow-based-programming.git",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "lerna": "^3.20.2"
+  }
+}
