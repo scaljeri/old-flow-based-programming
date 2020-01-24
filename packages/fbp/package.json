@@ -12,7 +12,7 @@
   "unpkg": "dist/fbp/fbp.js",
   "files": [
     "dist/",
-    "dist/loader/"
+    "loader/"
   ],
   "scripts": {
     "build": "stencil build --docs",
