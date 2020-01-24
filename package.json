@@ -5,9 +5,13 @@
   "private": true,
   "repository": "https://github.com/scaljeri/flow-based-programming.git",
   "license": "MIT",
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": ["packages/*"],
+    "nohoist": [
+      "**/fbp", 
+      "**/fbp/**"
+    ]
+  },
   "dependencies": {
     "lerna": "^3.20.2"
   }

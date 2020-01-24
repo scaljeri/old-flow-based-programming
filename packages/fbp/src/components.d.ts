@@ -10,6 +10,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
+  interface FbpMain {}
   interface MyComponent {
     /**
     * The first name
@@ -29,17 +30,25 @@ export namespace Components {
 declare global {
 
 
+  interface HTMLFbpMainElement extends Components.FbpMain, HTMLStencilElement {}
+  var HTMLFbpMainElement: {
+    prototype: HTMLFbpMainElement;
+    new (): HTMLFbpMainElement;
+  };
+
   interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
   var HTMLMyComponentElement: {
     prototype: HTMLMyComponentElement;
     new (): HTMLMyComponentElement;
   };
   interface HTMLElementTagNameMap {
+    'fbp-main': HTMLFbpMainElement;
     'my-component': HTMLMyComponentElement;
   }
 }
 
 declare namespace LocalJSX {
+  interface FbpMain {}
   interface MyComponent {
     /**
     * The first name
@@ -56,6 +65,7 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'fbp-main': FbpMain;
     'my-component': MyComponent;
   }
 }
@@ -66,6 +76,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'fbp-main': LocalJSX.FbpMain & JSXBase.HTMLAttributes<HTMLFbpMainElement>;
       'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
     }
   }
