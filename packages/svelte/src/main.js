@@ -1,9 +1,7 @@
 import App from './App.svelte';
 
 import { applyPolyfills, defineCustomElements } from '@scaljeri/fbp/loader';
-console.log('load sencil');
 applyPolyfills().then(() => {
-	console.log('load sencil');
 	defineCustomElements(window);
 });
 
