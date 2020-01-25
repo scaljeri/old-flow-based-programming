@@ -7,28 +7,29 @@
 
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-
+import {
+  FbpNode,
+} from './types/node';
 
 export namespace Components {
-  interface FbpMain {}
-  interface MyComponent {
-    /**
-    * The first name
-    */
-    'first': string;
-    /**
-    * The last name
-    */
-    'last': string;
-    /**
-    * The middle name
-    */
-    'middle': string;
+  interface FbpConnection {}
+  interface FbpMain {
+    'nodes': FbpNode[];
   }
+  interface FbpNode {
+    'activate': (state: boolean) => Promise<void>;
+  }
+  interface FbpXyz {}
 }
 
 declare global {
 
+
+  interface HTMLFbpConnectionElement extends Components.FbpConnection, HTMLStencilElement {}
+  var HTMLFbpConnectionElement: {
+    prototype: HTMLFbpConnectionElement;
+    new (): HTMLFbpConnectionElement;
+  };
 
   interface HTMLFbpMainElement extends Components.FbpMain, HTMLStencilElement {}
   var HTMLFbpMainElement: {
@@ -36,37 +37,38 @@ declare global {
     new (): HTMLFbpMainElement;
   };
 
-  interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
-  var HTMLMyComponentElement: {
-    prototype: HTMLMyComponentElement;
-    new (): HTMLMyComponentElement;
+  interface HTMLFbpNodeElement extends Components.FbpNode, HTMLStencilElement {}
+  var HTMLFbpNodeElement: {
+    prototype: HTMLFbpNodeElement;
+    new (): HTMLFbpNodeElement;
+  };
+
+  interface HTMLFbpXyzElement extends Components.FbpXyz, HTMLStencilElement {}
+  var HTMLFbpXyzElement: {
+    prototype: HTMLFbpXyzElement;
+    new (): HTMLFbpXyzElement;
   };
   interface HTMLElementTagNameMap {
+    'fbp-connection': HTMLFbpConnectionElement;
     'fbp-main': HTMLFbpMainElement;
-    'my-component': HTMLMyComponentElement;
+    'fbp-node': HTMLFbpNodeElement;
+    'fbp-xyz': HTMLFbpXyzElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface FbpMain {}
-  interface MyComponent {
-    /**
-    * The first name
-    */
-    'first'?: string;
-    /**
-    * The last name
-    */
-    'last'?: string;
-    /**
-    * The middle name
-    */
-    'middle'?: string;
+  interface FbpConnection {}
+  interface FbpMain {
+    'nodes'?: FbpNode[];
   }
+  interface FbpNode {}
+  interface FbpXyz {}
 
   interface IntrinsicElements {
+    'fbp-connection': FbpConnection;
     'fbp-main': FbpMain;
-    'my-component': MyComponent;
+    'fbp-node': FbpNode;
+    'fbp-xyz': FbpXyz;
   }
 }
 
@@ -76,8 +78,10 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'fbp-connection': LocalJSX.FbpConnection & JSXBase.HTMLAttributes<HTMLFbpConnectionElement>;
       'fbp-main': LocalJSX.FbpMain & JSXBase.HTMLAttributes<HTMLFbpMainElement>;
-      'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+      'fbp-node': LocalJSX.FbpNode & JSXBase.HTMLAttributes<HTMLFbpNodeElement>;
+      'fbp-xyz': LocalJSX.FbpXyz & JSXBase.HTMLAttributes<HTMLFbpXyzElement>;
     }
   }
 }

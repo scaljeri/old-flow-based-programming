@@ -16,7 +16,12 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "@rollup/plugin-json": "^4.0.1",
+    "@scaljeri/fbp": "0.0.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^2.0.4",
     "sirv-cli": "^0.4.4",
-    "@scaljeri/fbp": "0.0.1"
+    "svelte-preprocess": "^3.3.0"
   }
 }

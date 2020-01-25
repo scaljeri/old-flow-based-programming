@@ -5,7 +5,7 @@
 <main>
 	<h1>Hello {name}!</h1>
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-	<my-component></my-component>
+	<fbp-xyz></fbp-xyz>
 </main>
 
 <style>
@@ -23,7 +23,7 @@
 		font-weight: 100;
 	}
 
-	@media (min-width: 640px) {
+	@media (min-width: 640px) { 
 		main {
 			max-width: none;
 		}

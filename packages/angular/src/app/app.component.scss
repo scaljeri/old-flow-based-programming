@@ -1,0 +1,10 @@
+:host {
+    display: flex;
+    height: calc(100% - 64px);
+    border: 2px solid green;
+    margin: 30px 100px 30px 30px;
+}
+
+fbp-main  {
+    flex: 1;
+}

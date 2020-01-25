@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  border: 2px solid gray;
+  position: absolute;
+}
+
+:host(.is-draggable) {
+    background-color: lightgray;
+}
