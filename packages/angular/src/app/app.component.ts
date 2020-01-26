@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FbpNode, FbpSocketTypes } from '@scaljeri/fbp';
+import { fixtureFbpBasic } from '@scaljeri/fbp-shared';
 
 @Component({
   selector: 'app-root',
@@ -9,39 +9,5 @@ import { FbpNode, FbpSocketTypes } from '@scaljeri/fbp';
 export class AppComponent {
   title = 'demo-site';
 
-  data = {
-    name: 'demo flow',
-    nodes: [
-      { 
-        id: 'sfgt23',
-        x: 100,
-        y: 100,
-        sockets: [
-          { id: 'wfr2efwdv',
-            type: FbpSocketTypes.IN
-          },
-          {
-            id: '3ewfvrgw',
-            type: FbpSocketTypes.OUT
-          }
-        ]
-      } as FbpNode,
-      { 
-        id: 'sreger4',
-        x: 300,
-        y: 300,
-        sockets: [
-          { id: 'wfgfdfg',
-            type: FbpSocketTypes.IN
-          }
-        ]
-      }
-    ],
-    connections: [
-      {
-        from: 'wfr2efwdv',
-        to: 'wfgfdfg'
-      }
-    ]
-  }
+  data = fixtureFbpBasic;
 }

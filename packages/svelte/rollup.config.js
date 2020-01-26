@@ -28,6 +28,7 @@ export default {
 
             // Emit CSS as "files" for other plugins to process
             emitCss: true,
+            // customElement: true,
 
             preprocess: autoPreprocess()
         }),

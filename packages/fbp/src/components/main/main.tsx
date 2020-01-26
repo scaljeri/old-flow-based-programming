@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Element, Listen, State } from '@stencil/core';
+import { Component, Host, h, Prop, Element, Listen, State, Watch } from '@stencil/core';
 import { FbpNode } from '../../types/node';
 
 @Component({
@@ -20,13 +20,23 @@ export class Main {
   private boundingRect: DOMRect;
 
   componentDidLoad(): void {
-    this.boundingRect = this.host.getBoundingClientRect();
+    this.onUpdateNodes(this.nodes);
+  }
+  componentDidUpdate(): void {
 
-    this.nodes.forEach(node => {
-      const el = this.host.querySelector(`#${node.id}`) as HTMLElement;
-      this.setStyles(node.x, node.y, el, this.nextZIndex());
-    });
+  }
 
+  @Watch('nodes')
+  onUpdateNodes(nodes): void {
+    console.log('received nodes', nodes);
+    if (nodes) {
+      this.boundingRect = this.host.getBoundingClientRect();
+
+      nodes.forEach(node => {
+        const el = this.host.querySelector(`#${node.id}`) as HTMLElement;
+        this.setStyles(node.x, node.y, el, this.nextZIndex());
+      });
+    }
   }
 
   @Listen('mousedown')

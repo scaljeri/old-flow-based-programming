@@ -1,9 +1,9 @@
 import App from './App.svelte';
 
-import { applyPolyfills, defineCustomElements } from '@scaljeri/fbp/loader';
-applyPolyfills().then(() => {
-	defineCustomElements(window);
-});
+// import { applyPolyfills, defineCustomElements } from '@scaljeri/fbp/loader';
+// applyPolyfills().then(() => {
+	// defineCustomElements(window);
+// });
 
 const app = new App({
 	target: document.body,

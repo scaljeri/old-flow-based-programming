@@ -1,6 +1,13 @@
 {
-  "name": "@scaljeri/shared",
+  "name": "@scaljeri/fbp-shared",
   "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT"
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "tsc": "^1.20150623.0",
+    "@scaljeri/fbp": "^0.0.2"
+  }
 }
