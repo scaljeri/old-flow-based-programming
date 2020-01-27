@@ -1,4 +1,4 @@
-import { Xyz } from './xyz';
+import { Xyz } from './demo';
 
 describe('fbp-xyz', () => {
   it('builds', () => {

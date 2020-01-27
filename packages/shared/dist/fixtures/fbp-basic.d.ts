@@ -1,15 +1,7 @@
-import { FbpSocketTypes, FbpNode } from '@scaljeri/fbp';
+import { IFbpNode } from '../types/node';
 export declare const fixtureFbpBasic: {
     name: string;
-    nodes: (FbpNode | {
-        id: string;
-        x: number;
-        y: number;
-        sockets: {
-            id: string;
-            type: FbpSocketTypes;
-        }[];
-    })[];
+    nodes: IFbpNode[];
     connections: {
         from: string;
         to: string;

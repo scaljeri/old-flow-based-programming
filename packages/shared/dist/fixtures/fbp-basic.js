@@ -1,26 +1,26 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const fbp_1 = require("@scaljeri/fbp");
+const socket_1 = require("../types/socket");
 exports.fixtureFbpBasic = {
     name: 'demo flow',
     nodes: [
         {
             id: 'sfgt23',
-            x: 100,
-            y: 100,
+            x: 0,
+            y: 0,
             sockets: [
-                { id: 'wfr2efwdv', type: fbp_1.FbpSocketTypes.IN },
+                { id: 'wfr2efwdv', type: socket_1.FbpSocketTypes.IN },
                 {
                     id: '3ewfvrgw',
-                    type: fbp_1.FbpSocketTypes.OUT
+                    type: socket_1.FbpSocketTypes.OUT
                 }
             ]
         },
         {
             id: 'sreger4',
-            x: 300,
-            y: 300,
-            sockets: [{ id: 'wfgfdfg', type: fbp_1.FbpSocketTypes.IN }]
+            x: 30,
+            y: 30,
+            sockets: [{ id: 'wfgfdfg', type: socket_1.FbpSocketTypes.IN }]
         }
     ],
     connections: [

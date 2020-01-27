@@ -22,7 +22,7 @@
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1",
-    "@scaljeri/fbp": "0.0.4",
+    "@scaljeri/fbp": "0.0.8",
     "@scaljeri/fbp-shared": "1.0.0"
   },
   "devDependencies": {

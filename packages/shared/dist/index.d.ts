@@ -1,1 +1,2 @@
-export * from './fixtures';
+export * from './fixtures/index';
+export * from './types/index';

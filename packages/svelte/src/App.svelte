@@ -5,6 +5,7 @@
   console.log(data);
   setTimeout(() => {
     const el = document.querySelector('fbp-main');
+    console.log(data);
     el.nodes = data.nodes;
   });
 </script>
@@ -45,7 +46,7 @@
   <!-- {#if data && data.nodes} -->
     <fbp-main>
       {#each data.nodes as node}
-        <fbp-node id={node.id} />
+        <fbp-node nodeId={node.id} />
       {/each}
     </fbp-main>
   <!-- {/if} -->

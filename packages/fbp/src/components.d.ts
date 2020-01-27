@@ -8,18 +8,19 @@
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
-  FbpNode,
-} from './types/node';
+  IFbpNode,
+} from '@scaljeri/fbp-shared';
 
 export namespace Components {
   interface FbpConnection {}
+  interface FbpDemo {}
   interface FbpMain {
-    'nodes': FbpNode[];
+    'nodes': IFbpNode[];
   }
   interface FbpNode {
     'activate': (state: boolean) => Promise<void>;
+    'nodeId': string;
   }
-  interface FbpXyz {}
 }
 
 declare global {
@@ -29,6 +30,12 @@ declare global {
   var HTMLFbpConnectionElement: {
     prototype: HTMLFbpConnectionElement;
     new (): HTMLFbpConnectionElement;
+  };
+
+  interface HTMLFbpDemoElement extends Components.FbpDemo, HTMLStencilElement {}
+  var HTMLFbpDemoElement: {
+    prototype: HTMLFbpDemoElement;
+    new (): HTMLFbpDemoElement;
   };
 
   interface HTMLFbpMainElement extends Components.FbpMain, HTMLStencilElement {}
@@ -42,33 +49,29 @@ declare global {
     prototype: HTMLFbpNodeElement;
     new (): HTMLFbpNodeElement;
   };
-
-  interface HTMLFbpXyzElement extends Components.FbpXyz, HTMLStencilElement {}
-  var HTMLFbpXyzElement: {
-    prototype: HTMLFbpXyzElement;
-    new (): HTMLFbpXyzElement;
-  };
   interface HTMLElementTagNameMap {
     'fbp-connection': HTMLFbpConnectionElement;
+    'fbp-demo': HTMLFbpDemoElement;
     'fbp-main': HTMLFbpMainElement;
     'fbp-node': HTMLFbpNodeElement;
-    'fbp-xyz': HTMLFbpXyzElement;
   }
 }
 
 declare namespace LocalJSX {
   interface FbpConnection {}
+  interface FbpDemo {}
   interface FbpMain {
-    'nodes'?: FbpNode[];
+    'nodes'?: IFbpNode[];
   }
-  interface FbpNode {}
-  interface FbpXyz {}
+  interface FbpNode {
+    'nodeId'?: string;
+  }
 
   interface IntrinsicElements {
     'fbp-connection': FbpConnection;
+    'fbp-demo': FbpDemo;
     'fbp-main': FbpMain;
     'fbp-node': FbpNode;
-    'fbp-xyz': FbpXyz;
   }
 }
 
@@ -79,9 +82,9 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'fbp-connection': LocalJSX.FbpConnection & JSXBase.HTMLAttributes<HTMLFbpConnectionElement>;
+      'fbp-demo': LocalJSX.FbpDemo & JSXBase.HTMLAttributes<HTMLFbpDemoElement>;
       'fbp-main': LocalJSX.FbpMain & JSXBase.HTMLAttributes<HTMLFbpMainElement>;
       'fbp-node': LocalJSX.FbpNode & JSXBase.HTMLAttributes<HTMLFbpNodeElement>;
-      'fbp-xyz': LocalJSX.FbpXyz & JSXBase.HTMLAttributes<HTMLFbpXyzElement>;
     }
   }
 }

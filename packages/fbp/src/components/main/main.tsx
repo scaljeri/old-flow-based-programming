@@ -1,94 +1,60 @@
 import { Component, Host, h, Prop, Element, Listen, State, Watch } from '@stencil/core';
-import { FbpNode } from '../../types/node';
+import { Store, Unsubscribe } from '@stencil/redux';
+import "@stencil/redux";
 
+
+import { IFbpNode } from '@scaljeri/fbp-shared';
+import { configureStore } from '../../store';
+import { setNodePosition } from '../../store/actions/node';
+import * as dragNDrop from '../../utils/drag-drop';
 @Component({
   tag: 'fbp-main',
   styleUrl: 'main.scss',
   shadow: true
 })
 export class Main {
+  private storeUnsubscribe: Unsubscribe;
+  private dragState: dragNDrop.IDragAndDrop; 
+  setNodePosition: typeof setNodePosition;
   @Element() host: HTMLElement;
-  @Prop() nodes: FbpNode[];
+  @Prop() nodes: IFbpNode[];
+  @Prop({ context: 'store' }) store: Store;
 
   @State() private dragNode: HTMLFbpNodeElement;
 
-  private zIndex = 1;
-  private dragOffsetX = 0;
-  private dragOffsetY = 0;
-  private dragWidth = 0;
-  private dragHeight = 0;
-  private boundingRect: DOMRect;
-
-  componentDidLoad(): void {
-    this.onUpdateNodes(this.nodes);
-  }
-  componentDidUpdate(): void {
-
-  }
-
-  @Watch('nodes')
-  onUpdateNodes(nodes): void {
-    console.log('received nodes', nodes);
-    if (nodes) {
-      this.boundingRect = this.host.getBoundingClientRect();
-
-      nodes.forEach(node => {
-        const el = this.host.querySelector(`#${node.id}`) as HTMLElement;
-        this.setStyles(node.x, node.y, el, this.nextZIndex());
-      });
-    }
-  }
-
   @Listen('mousedown')
   onMouseDown(event): void {
-    const nodes: HTMLFbpNodeElement[] = event.path.filter(n => n.nodeName === 'FBP-NODE');
-
-    if (nodes.length) {
-      this.dragNode = nodes[0]; 
-      this.dragNode.activate(true);
-      this.dragNode.style.zIndex = this.nextZIndex();
-
-      const { x, y , width, height } = this.dragNode.getBoundingClientRect();
-
-      this.dragOffsetX = event.clientX - x;
-      this.dragOffsetY = event.clientY - y;
-      this.dragWidth = width;
-      this.dragHeight = height;
-    }
+    this.dragState = dragNDrop.start(event, this.host);
   }
 
   @Listen('mousemove')
-  onMouseMove(event: MouseEvent): void {
-      if (this.dragNode) {
-        this.setStyles(event.clientX, event.clientY);
-      }
-  }
-
-  @Listen('mouseup')
-  onMouseUp(): void {
-    if (this.dragNode) {
-      this.dragNode.activate(false);
-      this.dragNode = null;
+  onMouseMove(event: PointerEvent): void {
+    if (this.dragState) {
+      dragNDrop.move(this.dragState, event);
     }
   }
 
-  private setStyles(x: number, y: number, node: HTMLElement = this.dragNode, zIndex?: string): void {
-    console.log(this.boundingRect, this.dragOffsetY, this.dragOffsetX, x, y);
-    const maxX = this.boundingRect.x + this.boundingRect.width - this.dragWidth;
-    const maxY = this.boundingRect.y + this.boundingRect.height - this.dragHeight;
-    let coorX = Math.min(maxX, Math.max(this.boundingRect.x, x - this.dragOffsetX));
-    let coorY= Math.min(maxY, Math.max(this.boundingRect.y, y - this.dragOffsetY)); // this.boundingRect.y);  //y - this.dragOffsetY - this.boundingRect.y;
-
-    console.log(y, coorY, maxY, this.dragOffsetY);
-
-
-    node.style.left = `${coorX}px`;
-    node.style.top = `${coorY}px`;
-    node.style.zIndex = zIndex || (this.zIndex++).toString();
+  @Listen('mouseup')
+  onMouseUp(event: PointerEvent): void {
+    if (this.dragState) {
+      const { x, y } = dragNDrop.end(this.dragState, event);
+      this.setNodePosition(this.dragState.node.nodeId, x, y);
+      this.dragState = null;
+    }
   }
 
-  private nextZIndex(): string {
-    return (this.zIndex++).toString();
+  @Watch('nodes')
+  onNodesChange(): void {
+    this.componentWillLoad();
+  }
+  
+  componentWillLoad():  void {
+    this.store.mapDispatchToProps(this, { setNodePosition });
+    this.store.setStore(configureStore({ nodes: this.nodes }));
+  }
+
+  componentDidUnload() {
+    this.storeUnsubscribe();
   }
 
   render() {

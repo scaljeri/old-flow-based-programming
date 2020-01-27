@@ -1,7 +1,7 @@
 import { FbpSocket } from './socket';
 
 
-export interface FbpNode {
+export interface IFbpNode {
     type: string;
     parent: string;
     id: string;

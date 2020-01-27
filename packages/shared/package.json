@@ -2,12 +2,12 @@
   "name": "@scaljeri/fbp-shared",
   "version": "1.0.0",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "build": "rm -rf ./dist && tsc"
   },
   "dependencies": {
-    "tsc": "^1.20150623.0",
-    "@scaljeri/fbp": "^0.0.2"
+    "typescript": "^3.7.5"
   }
 }
