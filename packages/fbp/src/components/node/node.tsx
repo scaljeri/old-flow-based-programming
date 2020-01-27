@@ -10,16 +10,21 @@ import { IFbpState } from '../../types/state';
 export class Node {
   private storeUnsubscribe: Unsubscribe;
 
-  @State() private isActive = false;
   @Prop() nodeId: string;
   @Prop({ context: 'store' }) store: Store;
+  @State() isActive = false;
   @State() config: IFbpState['nodes'][0];
   @State() x: number;
   @State() y: number;
   @State() zIndex: number;
-  @Prop() isFullscreen = false;
+  @State() isFullscreen: boolean;
 
   // @Element() host: HTMLElement
+
+  @Method()
+  async isDraggable(): Promise<boolean> {
+    return !this.isFullscreen;
+  }
 
   @Method()
   async activate(state: boolean) {
@@ -28,14 +33,14 @@ export class Node {
 
   componentWillLoad() {
     this.storeUnsubscribe = this.store.mapStateToProps(this, (state: IFbpState) => {
-      console.log('yes');
       const config = state.nodes.filter(node => node.id === this.nodeId)[0] || {} as any;
 
+      console.log('store ' + this.isFullscreen);
       return {
         config,
         x: config.view.x,
         y: config.view.y,
-        isFullscreen: config.view.isFullscreen,
+        isFullscreen: this.isFullscreen === undefined ? config.view.isFullscreen : this.isFullscreen,
         zIndex: state.nodes.indexOf(config)
       };
     });
@@ -47,7 +52,8 @@ export class Node {
 
   @Listen('fbp.view.fullscreen')
   onFullScreen(): void {
-    this.isFullscreen = true;
+    console.log('set fs to '  + !this.isFullscreen);
+    this.isFullscreen = !this.isFullscreen;
   }
 
   @Listen('fbp.view.normal')
@@ -56,6 +62,7 @@ export class Node {
   }
 
   render() {
+    console.log('render ' + this.isFullscreen);
     return (
       <Host class={{
         'is-draggable': this.isActive,
@@ -69,5 +76,4 @@ export class Node {
       </Host>
     );
   }
-
 }

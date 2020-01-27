@@ -34,7 +34,7 @@ export class Main {
 
   @Listen('mouseup')
   onMouseUp(event: PointerEvent): void {
-    if (this.dragState) {
+    if (this.dragState && this.dragState.isDragged) {
       const { x, y } = dragNDrop.end(this.dragState, event);
       this.setNodePosition(this.dragState.node.nodeId, x, y);
       this.dragState = null;

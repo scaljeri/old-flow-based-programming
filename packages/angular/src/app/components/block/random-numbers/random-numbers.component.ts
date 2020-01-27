@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, HostListener, ElementRef } from '@angular/core';
 import { INodeChild } from 'src/app/types/node';
-import { IFbpNode } from '@scaljeri/fbp-shared';
+import { IFbpNode, createEvent, bindToClick } from '@scaljeri/fbp-shared';
 
 @Component({
   selector: 'app-random-numbers',
@@ -12,9 +12,14 @@ export class RandomNumbersComponent implements OnInit, INodeChild<RandomNumbersC
 
   data: IFbpNode<RandomNumbersComponent>;
 
-  constructor() { }
+  constructor(private el: ElementRef) { }
 
   ngOnInit() {
-  }
+    bindToClick(this.el.nativeElement, () => {
+      const event = createEvent('fbp.view.fullscreen');
+      this.el.nativeElement.dispatchEvent(event)
+    });
 
+  }
 }
+

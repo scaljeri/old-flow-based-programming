@@ -4,7 +4,12 @@ import { sass } from '@stencil/sass';
 export const config: Config = {
   namespace: 'fbp',
   plugins: [
-    sass()
+    sass({
+      injectGlobalPaths: [
+        // 'src/globals/variables.scss',
+        'src/globals/mixins.scss'
+      ]
+    })
   ],
   outputTargets: [
     {

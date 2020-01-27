@@ -19,15 +19,6 @@ exports.fixtureFbpBasic = {
                 }
             ]
         },
-        {
-            id: 'sreger4',
-            type: 'logger',
-            view: {
-                x: 30,
-                y: 30
-            },
-            sockets: [{ id: 'wfgfdfg', type: socket_1.FbpSocketTypes.IN }]
-        }
     ],
     connections: [
         {
