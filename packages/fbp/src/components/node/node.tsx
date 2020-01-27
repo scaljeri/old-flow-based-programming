@@ -1,4 +1,4 @@
-import { Component, Host, h, State, Method, Prop } from '@stencil/core';
+import { Component, Host, h, State, Method, Prop, Listen } from '@stencil/core';
 import { Store, Unsubscribe } from '@stencil/redux';
 
 import { IFbpState } from '../../types/state';
@@ -17,6 +17,7 @@ export class Node {
   @State() x: number;
   @State() y: number;
   @State() zIndex: number;
+  @Prop() isFullscreen = false;
 
   // @Element() host: HTMLElement
 
@@ -32,8 +33,9 @@ export class Node {
 
       return {
         config,
-        x: config.x,
-        y: config.y,
+        x: config.view.x,
+        y: config.view.y,
+        isFullscreen: config.view.isFullscreen,
         zIndex: state.nodes.indexOf(config)
       };
     });
@@ -43,9 +45,22 @@ export class Node {
     this.storeUnsubscribe();
   }
 
+  @Listen('fbp.view.fullscreen')
+  onFullScreen(): void {
+    this.isFullscreen = true;
+  }
+
+  @Listen('fbp.view.normal')
+  onNormalView(): void {
+    this.isFullscreen = false
+  }
+
   render() {
     return (
-      <Host class={{'is-draggable': this.isActive}} style={{
+      <Host class={{
+        'is-draggable': this.isActive,
+        'is-fullscreen': this.isFullscreen
+      }} style={{
           left: this.x + '%',
           top: this.y + '%',
           zIndex: '' + this.zIndex

@@ -6,8 +6,11 @@ exports.fixtureFbpBasic = {
     nodes: [
         {
             id: 'sfgt23',
-            x: 0,
-            y: 0,
+            type: 'random-number-generator',
+            view: {
+                x: 0,
+                y: 0
+            },
             sockets: [
                 { id: 'wfr2efwdv', type: socket_1.FbpSocketTypes.IN },
                 {
@@ -18,8 +21,11 @@ exports.fixtureFbpBasic = {
         },
         {
             id: 'sreger4',
-            x: 30,
-            y: 30,
+            type: 'logger',
+            view: {
+                x: 30,
+                y: 30
+            },
             sockets: [{ id: 'wfgfdfg', type: socket_1.FbpSocketTypes.IN }]
         }
     ],

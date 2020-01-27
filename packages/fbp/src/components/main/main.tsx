@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Element, Listen, State, Watch } from '@stencil/core';
+import { Component, Host, h, Prop, Element, Listen, Watch, State } from '@stencil/core';
 import { Store, Unsubscribe } from '@stencil/redux';
 import "@stencil/redux";
 
@@ -14,13 +14,11 @@ import * as dragNDrop from '../../utils/drag-drop';
 })
 export class Main {
   private storeUnsubscribe: Unsubscribe;
-  private dragState: dragNDrop.IDragAndDrop; 
+  @State() dragState: dragNDrop.IDragAndDrop; 
   setNodePosition: typeof setNodePosition;
   @Element() host: HTMLElement;
   @Prop() nodes: IFbpNode[];
   @Prop({ context: 'store' }) store: Store;
-
-  @State() private dragNode: HTMLFbpNodeElement;
 
   @Listen('mousedown')
   onMouseDown(event): void {
@@ -59,7 +57,7 @@ export class Main {
 
   render() {
     return (
-      <Host class={{'is-dragging': !!this.dragNode}}>
+      <Host class={{'is-dragging': !!this.dragState}}>
         <slot></slot>
       </Host>
     );

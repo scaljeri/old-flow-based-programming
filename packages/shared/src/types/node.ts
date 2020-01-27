@@ -1,16 +1,15 @@
 import { FbpSocket } from './socket';
 
-
-export interface IFbpNode {
-    type: string;
-    parent: string;
-    id: string;
+export interface IFbpNodeView {
     x: number;
     y: number;
-    config?: any;
+    isFullscreen?: boolean;
+    parentId?: string;
+}
+export interface IFbpNode<T = any> {
+    type: string;
+    id: string;
+    view: IFbpNodeView
+    config?: T;
     sockets?: FbpSocket[];
 }
-
-// export interface FbpNodeChild extends HTMLElement {
-//     data: any;
-// }

@@ -21,8 +21,9 @@ const nodes = (
         const newState = [ ...state ];
         newState.splice(state.indexOf(node), 1);
         newState.push({ ...node, 
+          view: {
           x: action.x,
-          y: action.y});
+          y: action.y}});
 
           return newState;
       }

@@ -7,9 +7,10 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default     |
-| -------- | --------- | ----------- | -------- | ----------- |
-| `nodeId` | `node-id` |             | `string` | `undefined` |
+| Property       | Attribute       | Description | Type      | Default     |
+| -------------- | --------------- | ----------- | --------- | ----------- |
+| `isFullscreen` | `is-fullscreen` |             | `boolean` | `false`     |
+| `nodeId`       | `node-id`       |             | `string`  | `undefined` |
 
 
 ## Methods

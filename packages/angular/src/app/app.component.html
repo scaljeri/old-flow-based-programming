@@ -1,5 +1,7 @@
 <!-- <fbp-xyz></fbp-xyz> -->
 
 <fbp-main [nodes]="data.nodes">
-        <fbp-node *ngFor="let node of data.nodes" [nodeId]="node.id"></fbp-node>
+        <fbp-node *ngFor="let node of data.nodes" [nodeId]="node.id">
+                <ng-templage #tmpl></ng-templage>
+        </fbp-node>
 </fbp-main> 

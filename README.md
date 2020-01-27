@@ -1,8 +1,10 @@
 # flow-based-programming
 Flow based programming library
 
-### Setup
+### Run the project
 
-Add the dependency manually to package.json and then (in the root) run
+    $> yarn
+    $> lerna run build
+    $> lerna run start:angular
 
-    $> lerna bootstrap
+Currently only angular works, the other frameworks have too much issues
