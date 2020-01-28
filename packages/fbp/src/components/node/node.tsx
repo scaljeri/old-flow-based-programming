@@ -17,7 +17,7 @@ export class Node {
   @State() x: number;
   @State() y: number;
   @State() zIndex: number;
-  @State() isFullscreen: boolean;
+  @Prop() isFullscreen: boolean;
 
   // @Element() host: HTMLElement
 
@@ -35,12 +35,12 @@ export class Node {
     this.storeUnsubscribe = this.store.mapStateToProps(this, (state: IFbpState) => {
       const config = state.nodes.filter(node => node.id === this.nodeId)[0] || {} as any;
 
-      console.log('store ' + this.isFullscreen);
+      console.log('store ' + this.isFullscreen, config.view);
       return {
         config,
         x: config.view.x,
         y: config.view.y,
-        isFullscreen: this.isFullscreen === undefined ? config.view.isFullscreen : this.isFullscreen,
+        // isFullscreen: this.isFullscreen === undefined ? config.view.isFullscreen : this.isFullscreen,
         zIndex: state.nodes.indexOf(config)
       };
     });
@@ -62,7 +62,7 @@ export class Node {
   }
 
   render() {
-    console.log('render ' + this.isFullscreen);
+    console.log('render ' + this.x, this.y);
     return (
       <Host class={{
         'is-draggable': this.isActive,

@@ -20,6 +20,7 @@ export namespace Components {
   interface FbpNode {
     'activate': (state: boolean) => Promise<void>;
     'isDraggable': () => Promise<boolean>;
+    'isFullscreen': boolean;
     'nodeId': string;
   }
 }
@@ -65,6 +66,7 @@ declare namespace LocalJSX {
     'nodes'?: IFbpNode[];
   }
   interface FbpNode {
+    'isFullscreen'?: boolean;
     'nodeId'?: string;
   }
 

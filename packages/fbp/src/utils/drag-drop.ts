@@ -19,7 +19,7 @@ export function start(event: PointerEvent, parent: HTMLElement): IDragAndDrop {
   if (nodes.length) {
     const node = nodes[0];
 
-    if (node.isDraggable()) {
+    if (!node.isFullscreen) {
       const parentRect = parent.getBoundingClientRect();
       const nodeRect = node.getBoundingClientRect();
 
@@ -43,18 +43,10 @@ function updateCoordinates(state, event): void {
   const x = event.clientX;
   const y = event.clientY;
 
-  const maxX =
-    /*state.parentRect.x +*/ state.parentRect.width - state.nodeRect.width;
-  const maxY =
-    /* state.parentRect.y + */ state.parentRect.height - state.nodeRect.height;
-  state.x = Math.min(
-    maxX,
-    Math.max(/*state.parentRect.x */ 0, x - state.offsetX)
-  );
-  state.y = Math.min(
-    maxY,
-    Math.max(/*state.parentRect.y */ 0, y - state.offsetY)
-  );
+  const maxX = state.parentRect.width - state.nodeRect.width;
+  const maxY = state.parentRect.height - state.nodeRect.height;
+  state.x = Math.min( maxX, Math.max(0, x - state.offsetX));
+  state.y = Math.min( maxY, Math.max(0, y - state.offsetY));
 }
 
 export function move(state: IDragAndDrop, event: PointerEvent): void {

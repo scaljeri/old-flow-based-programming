@@ -8,8 +8,8 @@ exports.fixtureFbpBasic = {
             id: 'sfgt23',
             type: 'random-number-generator',
             view: {
-                x: 0,
-                y: 0
+                x: 50,
+                y: 50
             },
             sockets: [
                 { id: 'wfr2efwdv', type: socket_1.FbpSocketTypes.IN },

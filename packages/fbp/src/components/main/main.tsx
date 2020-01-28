@@ -33,12 +33,19 @@ export class Main {
   }
 
   @Listen('mouseup')
-  onMouseUp(event: PointerEvent): void {
+  onMouseUp(event: PointerEvent) {
     if (this.dragState && this.dragState.isDragged) {
-      const { x, y } = dragNDrop.end(this.dragState, event);
-      this.setNodePosition(this.dragState.node.nodeId, x, y);
-      this.dragState = null;
+      const isFullscreen = this.dragState.node.isFullscreen;
+
+      if (!isFullscreen) {
+        console.log('ooops');
+        const { x, y } = dragNDrop.end(this.dragState, event);
+        console.log('PPPPPPPP',x,y);
+        this.setNodePosition(this.dragState.node.nodeId, x, y);
+      }
     }
+
+    this.dragState = null;
   }
 
   @Watch('nodes')
